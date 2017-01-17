@@ -1,0 +1,16 @@
+{
+  "name": "css-mq-splitter-plugin",
+  "version": "1.0.0",
+  "description": "Splits css files by media queries",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mihhail Arhipov",
+  "dependencies": {
+    "css-stringify": "^2.0.0",
+    "rework": "^1.0.1",
+    "rework-move-media": "0.0.5",
+    "rework-split-media": "0.0.1"
+  }
+}
