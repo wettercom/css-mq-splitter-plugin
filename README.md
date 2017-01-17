@@ -60,6 +60,9 @@ This configuration will create the following files
 * bundle.desktop.css
 
 You can then use the following following files to be included in your html like so:
+
+``` html
 <link rel="stylesheet" href="bundle.css" />
 <link rel="stylesheet" media="screen and (min-width: 720px)" href="bundle.tablet.css" />
 <link rel="stylesheet" media="screen and (min-width: 1200px)": 'desktop" href="bundle.desktop.css" />
+```
