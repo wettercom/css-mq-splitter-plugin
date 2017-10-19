@@ -2,6 +2,7 @@ var rework = require('rework');
 var splitMedia = require('rework-split-media');
 var moveMedia = require('rework-move-media');
 var stringify = require('css-stringify');
+var CleanCSS = require('clean-css');
 var RawSource = require('webpack-sources').RawSource;
 
 function CSSMQSplitterPlugin(options = {}) {
@@ -31,10 +32,12 @@ CSSMQSplitterPlugin.prototype.apply = function(compiler) {
             if (options[mediaQuery]) {
               let source = stringify(css[mediaQuery]);
               let newFile = file.replace(/(\.css)$/, '.' + options[mediaQuery] + '.css');
-              compilation.assets[newFile] = new RawSource(source);
+              let minified = new CleanCSS().minify(originalSource + source);
+              compilation.assets[newFile] = new RawSource(minified.styles);
             }
           });
-          compilation.assets[file] = new RawSource(originalSource);
+          // Hack to keep original css contents
+          compilation.assets[file.replace(/(\.css)$/, '.style.css')] = new RawSource(source);
           done();
         });
       });
