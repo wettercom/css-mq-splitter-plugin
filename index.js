@@ -32,7 +32,7 @@ CSSMQSplitterPlugin.prototype.apply = function(compiler) {
             if (options[mediaQuery]) {
               let source = stringify(css[mediaQuery]);
               let newFile = file.replace(/(\.css)$/, '.' + options[mediaQuery] + '.css');
-              let minified = new CleanCSS().minify(originalSource + source);
+              let minified = new CleanCSS({level: 2}).minify(originalSource + source);
               compilation.assets[newFile] = new RawSource(minified.styles);
             }
           });
