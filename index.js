@@ -32,12 +32,12 @@ CSSMQSplitterPlugin.prototype.apply = function(compiler) {
             if (options[mediaQuery]) {
               let source = stringify(css[mediaQuery]);
               let newFile = file.replace(/(\.css)$/, '.' + options[mediaQuery] + '.css');
-              let minified = new CleanCSS({level: 2}).minify(originalSource + source);
+              let minified = new CleanCSS({level: {1: {specialComments: 0}, 2: {}}}).minify(source);
               compilation.assets[newFile] = new RawSource(minified.styles);
             }
           });
-          // Hack to keep original css contents
-          compilation.assets[file.replace(/(\.css)$/, '.style.css')] = new RawSource(source);
+          let minified = new CleanCSS({level: {1: {specialComments: 0}, 2: {}}}).minify(originalSource);
+          compilation.assets[file] = new RawSource(minified.styles);
           done();
         });
       });
